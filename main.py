@@ -85,8 +85,7 @@ class Runner(object):
             self.hitbox_2 = (self.x + 40, self.y + 80, self.w - 100, self.h - 80)
             # pygame.draw.rect(screen, (255, 255, 255), self.hitbox, 1)
             # pygame.draw.rect(screen, (255, 255, 255), self.hitbox_2, 1)
-            # runs = mixer.Sound(os.path.join('game_files', 'game sounds', "running.mp3"))
-            # runs.play()
+            
 
 
 
@@ -119,17 +118,17 @@ class AC(object):
             return True
 
         return False
-
-        # if rect[0] == self.hitbox[0] and rect[1] == self.hitbox[1]
+        ## IF above collide code dosn't work for you then try these given below:
+        #1 if rect[0] == self.hitbox[0] and rect[1] == self.hitbox[1]
         #     return True
         # else:
         #     return False
-        # distance = math.sqrt(math.pow(rect[2] - self.hitbox[0], 2) + (math.pow(rect[3] - self.hitbox[1], 2)))
+        #2 distance = math.sqrt(math.pow(rect[2] - self.hitbox[0], 2) + (math.pow(rect[3] - self.hitbox[1], 2)))
         # if distance < 50:
         #     return True
         # else:
         #     return False
-        # # if rect[0] + rect[2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
+        # #3 if rect[0] + rect[2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
         # #     if rect[1] < self.hitbox[3]:
         # #         return True
         # # return False
@@ -147,7 +146,8 @@ class Antenna(AC):
         self.hitbox = (self.x + 10, self.y + 5, self.w - 15, self.h - 8)
         screen.blit(self.antenna, (self.x, self.y))
         # pygame.draw.rect(screen, (255, 255, 255), self.hitbox, 1)
-
+    
+   ## OR this one
     # def collide(self, rect):
     #     pass
     #     if rect[0] + rect[2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
@@ -168,12 +168,7 @@ class slide_1(AC):
 class slide_2(slide_1):
     s_1 = pygame.image.load(os.path.join('game_files','game_obstacles', 'Slide2.png'))
 
-
-# ac_1 = pygame.image.load("air-conditioner.png")
-# ac = pygame.transform.scale(ac_1, (90, 80))
-# ac_2 = pygame.image.load("window-ac.png")
-# ac2 = pygame.transform.scale(ac_2, (90, 80))
-
+    
 background = pygame.image.load(os.path.join('game_files', "background.jpg"))
 bg = pygame.transform.scale(background, (1300, 500))
 bgX = 0
@@ -182,10 +177,6 @@ clock = pygame.time.Clock()
 
 mixer.music.load(os.path.join('game_files', 'game sounds', "theme_song.mp3"))
 mixer.music.play(-1)
-
-# mixer.music.load(os.path.join('game_files', 'game sounds', "running.mp3"))
-# mixer.music.play(-1)
-
 
 
 c_x = 1200
@@ -336,7 +327,7 @@ while runtime:
             speed += 3
         if event.type == USEREVENT + 2:
             r = random.randint(0, 4)
-            # print(r)
+            # print(r) # to check the distance between obstacles
             if r == 0:
                 obstacle.append(Antenna(1400, 435, 64, 64))
                 Antenna(1400, 430, 64, 64)
@@ -352,12 +343,6 @@ while runtime:
             elif r == 3:
                 obstacle.append(slide_2(1700, 380, 64, 64))
                 slide_2(1700, 380, 64, 64)
-
-            # for r in range(0,2):
-            #     if r == 0:
-            #         obstacle.append(Antenna(1400, 430, 64, 64))
-            #     else:
-            #         obstacle.append(AC(1700, 430, 64, 64))
 
     clock.tick(speed)
     pygame.display.update()
